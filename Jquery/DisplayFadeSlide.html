@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //Display Effect
+            $(".btn1").click(function () {
+                $("p").hide();
+
+            });
+            $(".btn2").click(function () {
+                $("p").show();
+            });
+
+            //Fade Effect
+            $("button").click(function () {
+                $("#div1").fadeToggle();
+                $("#div2").fadeToggle("slow");
+                $("#div3").fadeToggle(3000);
+            })
+            //Side Effect
+            $("#flip").click(function () {
+                $("#panel").slideToggle("slow");
+            });
+        });
+    </script>
+    <style>
+        #panel,
+        #flip {
+            padding: 5px;
+            text-align: center;
+            width: 50%;
+            background-color: rgb(83, 219, 83);
+            border: solid 1px #c3c3c3;
+            margin: auto;
+        }
+        #panel {
+            padding: 50px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>This is a paragraph.</p>
+
+    <button class="btn1">Hide</button>
+    <button class="btn2">Show</button>
+    <br><br>
+    <button>Click to fade in/out boxes</button><br><br>
+    <div id="div1" style="width:80px;height:80px;background-color:red;"></div>
+    <br>
+    <div id="div2" style="width:80px;height:80px;background-color:green;"></div>
+    <br>
+    <div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
+    <br><br>
+
+    <div id="flip">Click to slide the panel down or up</div>
+    <div id="panel">Hello world!</div>
+
+</body>
+
+</html>
