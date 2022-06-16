@@ -1,0 +1,75 @@
+<!doctype html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        let i = 0;
+        $(document).ready(function () {
+            //Mouse Events
+            $("p").click(function () {
+                $(this).hide();
+            })
+            $("b").dblclick(function(){
+                $(this).hide();
+            });
+            
+            $("#p1").hover(function () {
+                alert("You entered p1!");
+            },
+                function () {
+                    alert("Bye! You now leave p1!");
+                }
+            )
+            // $("#p2").mouseenter(function(){
+            //     alert("You entered p2!");
+            // });
+            // $("#p3").mouseleave(function(){
+            //     alert("Bye! You now leave p1!");
+            // });
+            // $("#p1").mouseup(function(){
+            //     alert("Mouse up over p1!");
+            // });
+            // $("#p1").mousedown(function(){
+            //     alert("Mouse down over p1!");
+            // });
+
+
+            //Keyboard events
+            $("#name").keypress(function () {
+                $("span").text(i += 1);
+            });
+            $("#name").keydown(function(){
+                $("#name").css("background-color", "blue");
+            });
+            $("#name").keyup(function(){
+                $("#name").css("background-color", "pink");
+            });
+
+            //Form events
+            $("#target").focus(function(){
+                $(this).css("background-color", "yellow");
+            });
+            $("#target").blur(function(){
+                $(this).css("background-color", "green");
+            });
+        });
+    </script>
+</head>
+<body>
+    <p>Click me first</p>
+    <b>Click me second</b>
+    <br><br>
+    <p id="p1">This is first paragraph.</p>
+    <br><br>
+    <!-- <p id="p2">This is second paragraph.</p>
+    <br><br>
+    <p id="p3">This is third paragraph.</p> -->
+    <br><br>
+    Enter your name: <input id="name" type="text">
+    <p>Keypresses: <span>0</span></p>
+    <form>
+        Email: <input id="target" type="text">
+        Phone No: <input id="target" type="text">
+    </form>
+
+</body>
+</html>
