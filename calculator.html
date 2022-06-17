@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+ <script>
+ var numOne, numTwo, res, temp, operator;
+ function fun() {
+ operator = document.getElementById("operator").value;
+ numOne = parseInt(document.getElementById("one").value);
+ numTwo = parseInt(document.getElementById("two").value);
+ temp = document.getElementById("res");
+ temp.style.display = "block";
+ if (operator == "+") {
+ res = numOne + numTwo;
+ document.getElementById("result").value = res;
+ } else if (operator == "%") {
+ res = numOne % numTwo;
+ document.getElementById("result").value = res;
+ } else if (operator == "*") {
+ res = numOne % numTwo;
+ document.getElementById("result").value = res;
+ } else if (operator == "/") {
+ res = numOne / numTwo;
+ document.getElementById("result").value = res;
+ }
+ }
+ </script>
+</head>
+<body>
+ <p id="input">Enter First Number: <input id="one">
+ <br /><br />
+ Enter Second Number: <input id="two"></p>
+ Enter operator: <input id="operator"><br>
+ <p><button onclick="fun()">Result: </button></p>
+<p id="res" style="display:none;">
+ Result = <input id="result"></input><br /><br />
+</body>
+</html>
