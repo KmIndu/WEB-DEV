@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        input{
+            margin: 5px;
+        }
+        th,td{
+            border-bottom: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>particulars</th>
+            <th>rate</th>
+            <th>quantity</th>
+            <th>total</th>
+        </tr><tr>
+            <td>Product 1</td>
+            <td><input type="text" id="rate1"></td>
+            <td><input type="text" id="quantity1"></td>
+            <td><input type="text" id="total1"></td>
+        </tr><tr>
+            <td>Product 2</td>
+            <td><input type="text" id="rate2"></td>
+            <td><input type="text" id="quantity2"></td>
+            <td><input type="text" id="total2"></td>
+        </tr><tr>
+            <td>Product 3</td>
+            <td><input type="text" id="rate3"></td>
+            <td><input type="text" id="quantity3"></td>
+            <td><input type="text" id="total3"></td>
+        </tr><tr>
+            <td>Product 4</td>
+            <td><input type="text" id="rate4"></td>
+            <td><input type="text" id="quantity4"></td>
+            <td><input type="text" id="total4"></td>
+        </tr><tr>
+            <td>Product 5</td>
+            <td><input type="text" id="rate5"></td>
+            <td><input type="text" id="quantity5"></td>
+            <td><input type="text" id="total5"></td>
+        </tr><tr>
+            <td colspan="4" style="text-align:center"> Tax : <input type="text" id="tax"> Based on a 18% GST</td>
+        </tr><tr>
+            <td colspan="4" style="text-align:center"> Grandtotal : <input type="text" id="grandtotal"> Vat included</td>
+        </tr>
+    </table>     
+    <script>
+        let total1 = document.getElementById('total1');
+        let total2 = document.getElementById('total2');
+        let total3 = document.getElementById('total3');
+        let total4 = document.getElementById('total4');
+        let total5 = document.getElementById('total5');
+        let p1total = 0;
+        let p2total = 0;
+        let p3total = 0;
+        let p4total = 0;
+        let p5total = 0;
+        total1.addEventListener('click', function fun() {
+            let rate1 =parseInt(document.getElementById('rate1').value);
+            let quantity1 = parseInt(document.getElementById('quantity1').value);            
+            p1total = rate1 * quantity1;
+            total1.value = p1total; 
+
+        });
+        total2.addEventListener('click', function fun() {
+            let rate2 = parseInt(document.getElementById('rate2').value);
+            let quantity2 = parseInt(document.getElementById('quantity2').value);            
+            p2total = rate2 * quantity2;
+            total2.value = p2total; 
+        });
+        total3.addEventListener('click', function fun() {
+            let rate3 = parseInt(document.getElementById('rate3').value);
+            let quantity3 = parseInt(document.getElementById('quantity3').value);            
+            p3total = rate3 * quantity3;
+            total3.value = p3total; 
+        });
+        total4.addEventListener('click', function fun() {
+            let rate4 = parseInt(document.getElementById('rate4').value);
+            let quantity4 = parseInt(document.getElementById('quantity4').value);            
+            p4total = rate4 * quantity4;
+            total4.value = p4total; 
+        });
+        total5.addEventListener('click', function fun() {
+            let rate5 = parseInt(document.getElementById('rate5').value);
+            let quantity5 = parseInt(document.getElementById('quantity5').value);            
+            p5total = rate5 * quantity5;
+            total5.value = p5total; 
+        });
+        let tax = 0;
+        let taxinpt = document.getElementById('tax');
+        taxinpt.addEventListener('click', ()=>{
+            tax = (p1total+p2total+p3total+p4total+p5total)*0.18;
+            taxinpt.value = tax;
+        });
+        let gt = document.getElementById('grandtotal');
+        gt.addEventListener('click', ()=>{
+            gt.value = p1total+p2total+p3total+p4total+p5total+tax;
+        })
+        
+
+    </script>
+</body>
+</html>
