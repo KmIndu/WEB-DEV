@@ -1,0 +1,262 @@
+
+
+_db_connect.php
+<?php
+$server = "localhost ";
+$username = 'root';
+$password = '';
+$database = "student";
+$conn = mysqli_connect($server, $username, $password, $database);
+if(!$conn) 
+die("Error " . mysqli_connect_error());
+else
+echo 'Connection made successfully!!'
+?>
+
+welcome.php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 210px;
+        }
+        li{
+            font-size:30px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+     ul>
+            <li><a class="nav-link" href="insert.php">Insert</a></li>
+            <li><a class="nav-link" href="display.php">Display</a></li>
+            <li><a class="nav-link" href="update.php">Update</a></li>
+            <li><a class="nav-link" href="delete.php">Delete</a></li>
+        </ul>
+
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+insert.php
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $gender = $_POST['gender'];
+    if($gender == 'male') {
+        $gender = 'm';
+    }else $gender = 'f';
+ require 'partials/_db_connect.php';
+    $sql = "INSERT INTO student(`name`, `email`, `gender`) values('$name', '$email', '$gender')";
+    $result = mysqli_query($conn, $sql);
+    if($result) {
+        echo "<script>
+        alert('Regitration Successful');
+        </script>";
+    }else {
+        echo "<script>
+        alert('Not Registered');
+        </script>";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert</title>
+    <style>
+        #container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top:210px;
+        }
+        a{
+            font-size:25px;
+        }
+    </style>
+</head>
+<body>
+    <h2>
+        <a href="/anant/registration/Welcome.php">Home</a>
+    </h2>
+    <div id="container">
+        <form action="insert.php" method="post">
+            <label for="name">Name : </label>
+            <input type="text" name="name" id="name"><br><br>
+            <label for="email">Email : </label>
+            <input type="email" name="email" id="email">
+            <h3>Gender</h3>
+            <input type="radio" name="gender" id="male" value="male">
+     <label for="male">Male</label>
+            <input type="radio" name="gender" id="female" value="female">
+            <label for="female">Female</label><br><br>
+            <button type="submit" id="btn">Submit</button>
+        </form>
+    </div>
+    
+</body>
+</html>
+
+display.php
+<?php
+echo '<title>Display</title>';
+echo '
+<h2>
+<a style="font-size:25px;" href="/anant/registration/Welcome.php">Home</a>
+</h2>';
+require 'partials/_db_connect.php';
+$sql = 'SELECT * FROM student';
+$result = mysqli_query($conn, $sql);
+if($result) {
+    $num = mysqli_num_rows($result);
+    if($num > 0) {
+       echo '<table border="2" cellspacing="3" cellpadding="2">
+       <tr>
+           <th>Name</td>
+           <th>Email</td>
+           <th>Gender</td>
+       </tr>';
+        while($row = mysqli_fetch_assoc($result)) {
+            $gen = "Male";
+            if($row['gender'] == 'f') $gen = 'Female';
+            echo 
+            '<tr>
+                 <td>'.$row['name'].'</td>
+                 <td>'.$row['email'].'</td>
+                 <td>'.$gen.'</td>
+            </tr>';
+        }
+        echo '</table>';
+    }
+}
+?>
+
+
+update.php
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    require 'partials/_db_connect.php';
+    $sql = "update student set `email` = '$email' where `name` = '$name'";
+    $result = mysqli_query($conn, $sql);
+    if($result) {
+        echo "<script>
+        alert('Updation Successful');
+        </script>";
+    }else {
+        echo "<script>
+        alert('User Not Found');
+        </script>";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <style>
+        a{
+            font-size:25px;
+        }
+    </style>
+</head>
+<body>
+    <h2>
+        <a href="/anant/registration/Welcome.php">Home</a>
+    </h2>
+    <form action="update.php" method="post">
+        <label for="name">Name:</label>
+        <input type="text" placeholder="Enter Name" name="name"><br><br>
+        <label for="email">Enter your New Email:</label>
+        <input type="email" placeholder="Enter new Email" name="email">
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
+
+delete.php
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $_POST['name'];
+    require 'partials/_db_connect.php';
+    $sql = "delete from `student` where `name`='$name'";
+    $result = mysqli_query($conn, $sql);
+    if($result) {
+        echo "<script>
+        alert('Deletion Successful');
+        </script>";
+    }else {
+        echo "<script>
+        alert('User Not Found');
+        </script>";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete</title>
+    <style>
+        a{
+            font-size:25px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>
+        <a href="/anant/registration/Welcome.php">Home</a>
+    </h2>
+    <form action="delete.php" method="post">
+        <label for="name">Name:</label>
+        <input type="text" placeholder="Enter Name" name="name">
+        <button type="submit">Delete</button>
+    </form>
+</body>
+</html>
+
+
+
+
+
+<?php 
+// time for 60 days in future
+ $cookie_value = time() + 60*60*60*24;
+ setcookie('lastvisit' , date("G:i , m/d/y") , $cookie_value , )
+?>
+<?php
+    if(isset($_COOKIE['lastvisit']))
+    {
+        echo "Your last visit time and date are :  " . $_COOKIE['lastvisit'] . "<br>";
+        setcookie('lastvisit',"",time()-3600);
+    }
+    else{
+        echo "This is your first visit <br>";
+    }
+?>
+
